@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>first</title>
+    <script src="../js/modernizr.js"></script>
+    <style>
+    div{
+        text-align:center;
+    }
+    </style>
+    <script>
+    function canvasSupport(){
+        return Modernizr.canvas;
+    }
+    window.onload = function(){
+        if( !canvasSupport() ){
+            return ;
+        }
+        var the_canvas = document.getElementById('c1');
+        var context = the_canvas.getContext('2d');
+        console.log('開始畫canvas 囉!');
+        
+        function drawScreen(){
+            //background
+            context.fillStyle = '#ff0000';
+            context.fillRect( 0, 0, 1000, 300 );
+            
+            //text
+            context.fillStyle = '#000000';
+            context.font = '20px _sans';
+            context.textBaseline = 'top';
+            context.fillText( 'Hello World!', 80, 80 );
+            
+            //image
+            var helloWorldImage = new Image();
+            helloWorldImage.src = "http://www.fb-developers.info/tech/fb_dev/jssdk_canvas/img/jssdk_app_iframe.jpg";
+            helloWorldImage.onload = function(){
+                context.drawImage( helloWorldImage, 100, 100 );
+            };
+            
+            //border
+            context.strokeStyle = '#000000';
+            context.strokeRect( 5, 5, 990, 290 );
+        }
+        drawScreen();
+    };
+    </script>
+</head>
+<body>
+<div>
+    <canvas id="c1" width="1000" height="300">HI~ Canvas~</canvas>
+</div>
+</body>
+</html>
